@@ -121,25 +121,23 @@ public class Cenario1 {
 				.noneMatch(r -> r.getMomentoDevolucao().isPresent()));
 		Assertions.assertEquals(5, resultados.size());
 
-		List<Integer> idsExemplaresRetornados = resultados.stream()
-				.map(r -> r.idExemplar).collect(Collectors.toList());
-		List<Integer> idsExemplaresEsperados = exemplares.stream()
-				.map(e -> e.idExemplar).collect(Collectors.toList());
+		Set<Integer> idsExemplaresRetornados = resultados.stream()
+				.map(r -> r.idExemplar).collect(Collectors.toSet());
+		Set<Integer> idsExemplaresEsperados = exemplares.stream()
+				.map(e -> e.idExemplar).collect(Collectors.toSet());
 		Assertions.assertEquals(idsExemplaresEsperados,
 				idsExemplaresRetornados);
 
-		List<Integer> idsUsuariosRetornados = resultados.stream()
-				.map(r -> r.idUsuario).collect(Collectors.toList());
-		List<Integer> idsUsuariosEsperados = usuarios.stream()
-				.map(u -> u.idUsuario).collect(Collectors.toList());
+		Set<Integer> idsUsuariosRetornados = resultados.stream()
+				.map(r -> r.idUsuario).collect(Collectors.toSet());
+		Set<Integer> idsUsuariosEsperados = usuarios.stream()
+				.map(u -> u.idUsuario).collect(Collectors.toSet());
 		Assertions.assertEquals(idsUsuariosEsperados, idsUsuariosRetornados);
 
-		List<LocalDate> datasPrevistasDevolucaoRetornadas = resultados.stream()
-				.map(r -> r.dataPrevistaDevolucao).collect(Collectors.toList());
+		Set<LocalDate> datasPrevistasDevolucaoRetornadas = resultados.stream()
+				.map(r -> r.dataPrevistaDevolucao).collect(Collectors.toSet());
 		LocalDate previsaoEntrega = hoje.plusDays(60);
-		List<LocalDate> datasPrevistasEsperadas = List.of(previsaoEntrega,
-				previsaoEntrega, previsaoEntrega, previsaoEntrega,
-				previsaoEntrega);
+		Set<LocalDate> datasPrevistasEsperadas = Set.of(previsaoEntrega);
 		Assertions.assertEquals(datasPrevistasEsperadas,
 				datasPrevistasDevolucaoRetornadas);
 	}
